@@ -18,7 +18,6 @@ PCA9549::PCA9549(uint8_t deviceAddress, TwoWire *wire)
   _resetPin = -1;
   _forced   = false;
   _error    = PCA9549_OK;
-  _channels = 8;
 }
 
 
@@ -39,7 +38,7 @@ bool PCA9549::isConnected()
 
 bool PCA9549::enableChannel(uint8_t channel)
 {
-  if (channel >= _channels) return false;
+  if (channel >= 8) return false;
   if (!isEnabled(channel))
   {
     setChannelMask(_mask | (0x01 << channel));
@@ -50,7 +49,7 @@ bool PCA9549::enableChannel(uint8_t channel)
 
 bool PCA9549::disableChannel(uint8_t channel)
 {
-  if (channel >= _channels) return false;
+  if (channel >= 8) return false;
   if (!isEnabled(channel))
   {
     setChannelMask(_mask & ~(0x01 << channel));
@@ -61,7 +60,7 @@ bool PCA9549::disableChannel(uint8_t channel)
 
 bool PCA9549::selectChannel(uint8_t channel)
 {
-  if (channel >= _channels) return false;
+  if (channel >= 8) return false;
   setChannelMask(0x01 << channel);
   return true;
 }
@@ -69,7 +68,7 @@ bool PCA9549::selectChannel(uint8_t channel)
 
 bool PCA9549::isEnabled(uint8_t channel)
 {
-  if (channel >= _channels) return false;
+  if (channel >= 8) return false;
   return (_mask & (0x01 << channel));
 }
 
