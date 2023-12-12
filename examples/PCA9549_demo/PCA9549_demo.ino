@@ -7,7 +7,7 @@
 
 #include "PCA9549.h"
 
-PCA9549 MP(0x70);
+PCA9549 PCA(0x70);
 
 
 void setup()
@@ -19,40 +19,40 @@ void setup()
   Serial.println();
 
   Wire.begin();
-  if (MP.begin() == false)
+  if (PCA.begin() == false)
   {
     Serial.println("COULD NOT CONNECT");
   }
 
   Serial.print("MASK:\t");
-  Serial.println(MP.getChannelMask(), HEX);
+  Serial.println(PCA.getChannelMask(), HEX);
   for (int chan = 0; chan < 8; chan++)
   {
     Serial.print("PRE:\t");
-    Serial.print(MP.isEnabled(chan));
-    MP.enableChannel(chan);
+    Serial.print(PCA.isEnabled(chan));
+    PCA.enableChannel(chan);
     Serial.print("\t");
-    Serial.println(MP.isEnabled(chan));
+    Serial.println(PCA.isEnabled(chan));
     delay(100);
   }
   Serial.println();
-  MP.setChannelMask(0x00);
+  PCA.setChannelMask(0x00);
 
   Serial.print("MASK:\t");
-  Serial.println(MP.getChannelMask(), HEX);
+  Serial.println(PCA.getChannelMask(), HEX);
   for (int chan = 0; chan < 8; chan++)
   {
-    MP.enableChannel(chan);
+    PCA.enableChannel(chan);
 
     Serial.print("MASK:\t");
-    Serial.println(MP.getChannelMask(), HEX);
+    Serial.println(PCA.getChannelMask(), HEX);
     delay(100);
   }
   for (int chan = 0; chan < 8; chan++)
   {
-    MP.disableChannel(chan);
+    PCA.disableChannel(chan);
     Serial.print("MASK:\t");
-    Serial.println(MP.getChannelMask(), HEX);
+    Serial.println(PCA.getChannelMask(), HEX);
     delay(100);
   }
   Serial.println();
